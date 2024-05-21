@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Phonetic Generator</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Animate.css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <style>
+    /* Custom styles for animation */
+    .animated {
+      animation-duration: 1s;
+    }
+    /* Custom styles for header */
+    .header {
+      background-color: #007bff;
+      color: #fff;
+      padding: 20px 0;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    /* Custom styles for input form */
+    #translationForm {
+      border: 2px solid #007bff;
+      border-radius: 10px;
+      padding: 20px;
+      background-color: #f8f9fa;
+    }
+    /* Custom styles for output */
+    #translationResults {
+      border: 2px solid #007bff;
+      border-radius: 10px;
+      padding: 20px;
+      background-color: #f8f9fa;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="header">
+  <a href=""
+  <h1 class="mb-0 animated fadeIn" style="color: white; font-size: 35px;">Phonetic Generator</h1>
+</a>
+</div>
+
+<div class="container mt-5">
+  <!-- Input Form -->
+  <form id="translationForm" method="post" class="animated fadeInUp">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="inputText">Enter Text:</label>
+      <input type="text" class="form-control" id="inputText" name="inputText" placeholder="Enter text...">
+    </div>
+    <button type="submit" class="btn btn-primary">Translate</button>
+  </form>
+  
+  <!-- Display Results -->
+  {% if original_text %}
+  <div id="translationResults" class="mt-4 animated fadeIn">
+    <h3>Translation Results:</h3>
+    <p>Original Text: {{ original_text }}</p>
+    <p>Original Phonetic: {{ original_phonetic }}</p>
+    <p>Nepali Translation: {{ nepali_translation }}</p>
+    <p>Urdu Translation: {{ urdu_translation }}</p>
+    <p>Telugu Translation: {{ telugu_translation }}</p>
+    <p>Hindi Translation: {{ hindi_translation }}</p>
+    <p>Nepali Phonetic: {{ nepali_phonetic }}</p>
+    <p>Urdu Phonetic: {{ urdu_phonetic }}</p>
+    <p>Hindi Phonetic: {{ hindi_phonetic }}</p>
+    <p>Telugu Phonetic: {{ telugu_phonetic }}</p>
+    
+    
+  </div>
+  {% endif %}
+</div>
+<div class="container mt-5">
+  <h1>Last 5 Translations</h1>
+  <table class="table">
+      <thead>
+          <tr>
+              <th>#</th>
+              <th>Original Text</th>
+              <th>Nepali Translation</th>
+              <th>Hindi Translation</th>
+              <th>Urdu Translation</th>
+              <th>Telugu Translation</th>
+              <th>Original Phonetic</th>
+              <th>Nepali Phonetic</th>
+              <th>Hindi Phonetic</th>
+              <th>Urdu Phonetic</th>
+              <th>Telugu Phonetic</th>
+          </tr>
+      </thead>
+      <tbody>
+          {% for translation in last_five_translations %}
+          <tr>
+              <td>{{ forloop.counter }}</td>
+              <td>{{ translation.original_text }}</td>
+              <td>{{ translation.nepali_translation }}</td>
+              <td>{{ translation.hindi_translation }}</td>
+              <td>{{ translation.urdu_translation }}</td>
+              <td>{{ translation.telugu_translation }}</td>
+              <td>{{ translation.original_phonetic }}</td>
+              <td>{{ translation.nepali_phonetic }}</td>
+              <td>{{ translation.hindi_phonetic }}</td>
+              <td>{{ translation.urdu_phonetic }}</td>
+              <td>{{ translation.telugu_phonetic }}</td>
+          </tr>
+          {% endfor %}
+      </tbody>
+  </table>
+</div>
+<!-- Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- Wow.js for scroll animations -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+<script>
+  new WOW().init();
+</script>
+
+</body>
+</html>

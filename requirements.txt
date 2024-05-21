@@ -1,0 +1,7 @@
+Django==4.2.7
+eng_to_ipa==0.0.2
+googletrans==4.0.0rc1
+indic_nlp_library==0.92
+indic_transliteration==2.3.59
+indicnlp==0.0.1
+text2ipa==2.1.2
